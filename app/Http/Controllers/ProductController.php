@@ -54,4 +54,31 @@ class ProductController extends Controller
 
         return back()->with('success', 'Primary image updated successfully.');
     }
+    public function downloadSample()
+    {
+        $headers = ['SKU', 'Name', 'Description', 'Price'];
+        $sampleData = [
+            ['sku' => 'SAMPLE-001', 'name' => 'Sample Product 1', 'description' => 'This is a sample product description', 'price' => '29.99'],
+            ['sku' => 'SAMPLE-002', 'name' => 'Sample Product 2', 'description' => 'Another sample product', 'price' => '49.99'],
+        ];
+
+        $filename = 'sample_products.csv';
+        $handle = fopen('php://temp', 'w+');
+
+        // Write headers
+        fputcsv($handle, $headers);
+
+        // Write sample data
+        foreach ($sampleData as $row) {
+            fputcsv($handle, $row);
+        }
+
+        rewind($handle);
+        $content = stream_get_contents($handle);
+        fclose($handle);
+
+        return response($content)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
 }

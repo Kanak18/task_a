@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/sample/download', [ProductController::class, 'downloadSample'])->name('products.sample.download');
     Route::get('/products/{product}/images', [ProductController::class, 'images'])->name('products.images');
     Route::post('/products/{product}/set-primary', [ProductController::class, 'setPrimary'])->name('product.setPrimary');
 
