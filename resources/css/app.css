@@ -38,3 +38,72 @@
 .message-warning .message-text {
     @apply text-sm font-medium text-yellow-800;
 }
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.image-card {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.image-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Primary badge */
+.primary-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #22c55e;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* Size overlay */
+.size-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* Radio button */
+.radio-wrap {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.radio-wrap input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}

@@ -67,19 +67,32 @@
                                                 if($img->path_1024) $allImages[] = ['path' => $img->path_1024, 'size' => 1024, 'img_id' => $img->id, 'is_primary' => $img->is_primary && $product->primary_size == 1024];
                                             }
                                         @endphp
-                                        <div class="grid grid-cols-6 gap-2">
-                                            @foreach($allImages as $image)
-                                                <div class="bg-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-20 w-20 relative">
-                                                    <img src="/storage/{{ $image['path'] }}" alt="Product image" class="w-full h-full object-cover">
-                                                    @if($image['is_primary'])
-                                                        <div class="absolute top-1 right-1 bg-green-500 text-white px-1 py-0.5 rounded text-xs font-semibold">Primary</div>
-                                                    @endif
-                                                    <div class="absolute bottom-1 left-1">
-                                                        <input type="radio" name="primary" value="{{ $image['img_id'] }}-{{ $image['size'] }}" {{ $image['is_primary'] ? 'checked' : '' }} onchange="document.getElementById('primaryForm').submit()" class="w-3 h-3 text-white focus:ring-white">
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                        <div class="image-grid">
+    @foreach($allImages as $image)
+        <div class="image-card">
+            <img
+                src="{{ asset('storage/' . $image['path']) }}"
+                alt="Product image"
+            />
+
+            @if($image['is_primary'])
+                <div class="primary-badge">Primary</div>
+            @endif
+
+            <div class="size-overlay">{{ $image['size'] }}x{{ $image['size'] }}</div>
+
+            <div class="radio-wrap">
+                <input
+                    type="radio"
+                    name="primary"
+                    value="{{ $image['img_id'] }}-{{ $image['size'] }}"
+                    {{ $image['is_primary'] ? 'checked' : '' }}
+                    onchange="document.getElementById('primaryForm').submit()"
+                >
+            </div>
+        </div>
+    @endforeach
+</div>
                                     </div>
                                 </form>
                             @else
